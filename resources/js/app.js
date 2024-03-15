@@ -98,10 +98,12 @@ Vue.component(
 );
 
 Vue.component("project", require("./components/admin/project/index.vue").default);
-Vue.component(
-    "project-modal",
-    require("./components/admin/project/modal.vue").default
-);
+Vue.component("project-modal",require("./components/admin/project/modal.vue").default);
+Vue.component("project-view",require("./components/admin/project/view.vue").default);
+
+Vue.component("hizmet", require("./components/admin/hizmet/index.vue").default);
+Vue.component("hizmet-modal",require("./components/admin/hizmet/modal.vue").default);
+Vue.component("hizmet-view",require("./components/admin/hizmet/view.vue").default);
 
 Vue.component("duyuru", require("./components/admin/duyuru/index.vue").default);
 Vue.component(

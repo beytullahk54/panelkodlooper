@@ -23,6 +23,18 @@
         <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
         <!-- Argon CSS -->
         <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
+        
+        <style>
+        .newPageStyle{
+            width:45%!important;margin-left:1%;margin:0 auto
+        }
+
+        @media only screen and (max-width:959px) { 
+            .newPageStyle{
+            width:100%!important;margin-left:1%;margin:0 auto
+            }
+        }
+        </style>
     </head>
     <body class="{{ $class ?? '' }}">
         <div id="app"> 

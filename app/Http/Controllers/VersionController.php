@@ -75,6 +75,48 @@ class VersionController extends Controller
     {
 
 
+        if (!Schema::hasColumn('tbl_markalars', 'db_hizmet_ucreti')) {
+            Schema::table('tbl_markalars', function (Blueprint $table) {
+                $table->date('db_hizmet_ucreti')->nullable();
+            });
+        } 
+
+        if (!Schema::hasColumn('tbl_markalars', 'db_hizmet_bitis_tarihi')) {
+            Schema::table('tbl_markalars', function (Blueprint $table) {
+                $table->date('db_hizmet_bitis_tarihi')->nullable();
+            });
+        } 
+        
+
+        if (!Schema::hasTable('tbl_markalars')) {
+            Schema::create('tbl_markalars', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('db_name')->nullable();
+                $table->string('db_website')->nullable();
+                $table->string('db_hizmet')->nullable();
+                $table->timestamps();
+            });
+        }
+
+
+        if (!Schema::hasColumn('tbl_projects', 'db_website')) {
+            Schema::table('tbl_projects', function (Blueprint $table) {
+                $table->date('db_website')->nullable();
+            });
+        } 
+        if (!Schema::hasColumn('tbl_projects', 'db_tahmini_gun')) {
+            Schema::table('tbl_projects', function (Blueprint $table) {
+                $table->string('db_tahmini_gun')->nullable();
+                $table->date('db_tahmini_bitis_tarihi')->nullable();
+                $table->string('db_calisilan_gun')->nullable();
+                $table->date('db_bitis_tarihi')->nullable();
+                $table->text('db_not')->nullable();
+                $table->string('db_teklif_ucret')->nullable();
+                $table->string('db_anlasilan_ucret')->nullable();
+                $table->string('db_hizmet')->nullable();
+            });
+        }  
+
         if (!Schema::hasTable('tbl_projects')) {
             Schema::create('tbl_projects', function (Blueprint $table) {
                 $table->increments('id');
@@ -89,6 +131,20 @@ class VersionController extends Controller
             Schema::table('tbl_projects', function (Blueprint $table) {
                 $table->date('db_project_start_date')->nullable();
                 $table->date('db_project_end_date')->nullable();
+            });
+        } 
+        
+
+        if (!Schema::hasColumn('tbl_projects', 'db_musteri')) {
+            Schema::table('tbl_projects', function (Blueprint $table) {
+                $table->string('db_musteri')->nullable();
+            });
+        }   
+        
+
+        if (!Schema::hasColumn('tbl_projects', 'db_durum')) {
+            Schema::table('tbl_projects', function (Blueprint $table) {
+                $table->string('db_durum')->nullable();
             });
         }   
     }  

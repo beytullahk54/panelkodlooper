@@ -86,7 +86,7 @@ class DestekController extends Controller
         try {
             //return $request->all();
             $katilimci_create = new tbl_destek();
-            $katilimci_create->db_destek_konu = $request->db_adi;
+            $katilimci_create->db_destek_konu = $request->db_destek_konu;
             $katilimci_create->db_destek_aciklama = $request->db_destek_aciklama;
             $katilimci_create->db_firma_id = $request->db_firma_id;
             $katilimci_create->db_destek_durumu = "acik";
@@ -95,8 +95,6 @@ class DestekController extends Controller
             if($katilimci_create->save()){
                 $tbl_firma = tbl_firma::where("id","=",$request->db_firma_id)->first();
                 
-                smsGonder("Sayın ". $tbl_firma->firma_yetkili."; Kampüs LMS bayilik paneli üzerinden  ".Carbon::now()->format("d.m.y")." tarihinde yönetici tarafından sizlere destek talebi oluşturulmuştur. Lütfen en yakın zamanda kontrol ediniz. https://panel.kampuslms.com bağlantısından bayi paneline giriş yaparak konuyu takip edebilirsiniz. Teşekkür ederiz. Kampüs LMS https://bayi.kampuslms.com", $tbl_firma->db_cep_no);
-
                 return response()->json(['message' => $this->globalName.' başarıyla gönderildi',"status"=>true], 200);
             }else{
                 return response()->json(['message' => $this->globalName.' ekleme işlemi başarısız',"status"=>false], 200);
@@ -113,7 +111,27 @@ class DestekController extends Controller
         try {
             //return $request->all();
             $katilimci = tbl_destek::find($request->id);
-            $katilimci->db_adi = $request->db_adi;
+            $katilimci->db_destek_konu = $request->db_destek_konu;
+            $katilimci->db_destek_aciklama = $request->db_destek_aciklama;
+            
+            if($katilimci->save()){
+                return response()->json(['message' => $this->globalName.' başarıyla güncellendi',"status"=>true], 200);
+            }else{
+                return response()->json(['message' => $this->globalName.' ekleme işlemi başarısız',"status"=>false], 200);
+            }
+        } catch (\Exception $e) {
+            // Hata durumunda buraya düşeriz
+
+            debugSave( $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function islemGuncelle(Request $request)
+    {   
+        try {
+            //return $request->all();
+            $katilimci = tbl_destek::find($request->data['id']);
+            $katilimci->db_destek_durumu = $request->islem;
             
             if($katilimci->save()){
                 return response()->json(['message' => $this->globalName.' başarıyla güncellendi',"status"=>true], 200);
@@ -162,8 +180,6 @@ class DestekController extends Controller
                 $destek_create->save();
                 $tbl_firma = tbl_firma::where("id","=",$destek_create->db_firma_id)->first();
                 
-                smsGonder("Sayın ". $tbl_firma->firma_yetkili."; Kampüs LMS bayilik paneli üzerinden  ".$destek_create->created_at->format("d.m.y")." tarihinde göndermiş olduğunuz destek talebiniz tarafımızca cevaplanmıştır. https://panel.kampuslms.com bağlantısından bayi paneline giriş yaparak talebinize ilişkin cevabımızı inceleyebilirsiniz. Teşekkür ederiz. Kampüs LMS https://bayi.kampuslms.com", $tbl_firma->db_cep_no);
-                mailGonder($tbl_firma->db_yetkili_email,"Sayın ". $tbl_firma->firma_yetkili."; Kampüs LMS bayilik paneli üzerinden  ".$destek_create->created_at->format("d.m.y")." tarihinde göndermiş olduğunuz destek talebiniz tarafımızca cevaplanmıştır. https://panel.kampuslms.com bağlantısından bayi paneline giriş yaparak talebinize ilişkin cevabımızı inceleyebilirsiniz. Teşekkür ederiz. Kampüs LMS https://bayi.kampuslms.com","Kampus LMS - Destek");
 
                 return response()->json(['message' => $this->globalName.' başarıyla cevaplandı',"status"=>true], 200);
             }else{
@@ -238,15 +254,6 @@ class DestekController extends Controller
             
             if($katilimci_create->save()){
                 $tbl_firma = tbl_firma::where("id","=",$katilimci_create->db_firma_id)->first();
-                smsGonder("Sayın ". Auth::User()->name." ".Auth::User()->surname ."; Kampüs LMS bayilik paneli üzerinden  ".Carbon::now()->format("d.m.y")." tarihinde göndermiş olduğunuz destek talebiniz tarafımıza başarıyla ulaşmıştır. Destek talebiniz en kısa sürede panel üzerinden cevaplanacak ve size ayrı bir bilgilendirme yapılacaktır. Teşekkür ederiz. Kampüs LMS https://bayi.kampuslms.com",Auth::User()->firma->db_cep_no);
-                mailGonder($tbl_firma->db_yetkili_email,"Sayın ". Auth::User()->name." ".Auth::User()->surname ."; Kampüs LMS bayilik paneli üzerinden  ".Carbon::now()->format("d.m.y")." tarihinde göndermiş olduğunuz destek talebiniz tarafımıza başarıyla ulaşmıştır. Destek talebiniz en kısa sürede panel üzerinden cevaplanacak ve size ayrı bir bilgilendirme yapılacaktır. Teşekkür ederiz. Kampüs LMS https://bayi.kampuslms.com","Kampus LMS - Destek");
-
-
-                
-                smsGonder("Sayın Yetkili; Kampüs LMS bayilik paneli üzerinden ".Auth::User()->firma->firma_adi." tarafından ".Carbon::now()->format("d.m.y")." tarihinde destek talebi oluşturulmuştur.","5307955054");
-                mailGonder("kampuslmsbayi@gmail.com","Sayın Yetkili; Kampüs LMS bayilik paneli üzerinden ".Auth::User()->firma->firma_adi." tarafından ".Carbon::now()->format("d.m.y")." tarihinde destek talebi oluşturulmuştur.","Kampus LMS - Destek");
-
-                //5307955054
 
                 return response()->json(['message' => $this->globalName.' başarıyla gönderildi',"status"=>true], 200);
             }else{

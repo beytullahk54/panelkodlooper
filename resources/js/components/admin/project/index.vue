@@ -47,6 +47,27 @@
                                                             class="sort"
                                                             data-sort="budget"
                                                         >
+                                                            Güncelle
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="sort"
+                                                            data-sort="budget"
+                                                        >
+                                                            ID
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="sort"
+                                                            data-sort="budget"
+                                                        >
+                                                            Müşteri
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="sort"
+                                                            data-sort="budget"
+                                                        >
                                                             Proje Adı
                                                         </th>
                                                         <th
@@ -63,6 +84,27 @@
                                                         >
                                                             Proje Bitiş Tarihi
                                                         </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="sort"
+                                                            data-sort="budget"
+                                                        >
+                                                            Tahmini Gün
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="sort"
+                                                            data-sort="budget"
+                                                        >
+                                                            Çalışılan Gün
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="sort"
+                                                            data-sort="budget"
+                                                        >
+                                                            Hizmet
+                                                        </th>
                                                         <th scope="col"></th>
                                                     </tr>
                                                 </thead>
@@ -71,6 +113,18 @@
                                                         v-for="data in datas.data"
                                                     >
                                                         <td>
+                                                            <a :href="pageUrl+'/view/'+data.id">
+                                                                <img src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/30/external-edit-social-media-ui-tanah-basah-glyph-tanah-basah.png" alt="">
+                                                            </a>
+                                                            
+                                                        </td>
+                                                        <td>
+                                                            {{ data.id }}
+                                                        </td>
+                                                        <td>
+                                                            {{ data.db_musteri }}
+                                                        </td>
+                                                        <td>
                                                             {{ data.db_adi }}
                                                         </td>
                                                         <td>
@@ -78,6 +132,15 @@
                                                         </td>
                                                         <td>
                                                             {{ data.db_project_end_date |dateConverter }}
+                                                        </td>
+                                                        <td>
+                                                            {{ data.db_tahmini_gun  }}
+                                                        </td>
+                                                        <td>
+                                                            {{ data.db_calisilan_gun  }}
+                                                        </td>
+                                                        <td>
+                                                            {{ data.db_hizmet  }}
                                                         </td>
                                                         <td class="text-right">
                                                             <div

@@ -1,43 +1,44 @@
 <template>
     <div>
-        <destek-modal
+        <hizmet-modal
             @kaydet="dataStore"
             :data="formData"
             :modal="modalData"
-            :bayis="bayis"
-            @bayiUpdate="bayiUpdate"
-        ></destek-modal>
-
+        ></hizmet-modal>
         <div class="row">
-            <div class="col-4">
-
+            <div class="col-md-4">
                 <button
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     @click="dataCreate"
                     type="button"
-                    class="btn btn-primary btn-block"
+                    class="btn btn-primary"
                 >
-                    Yeni Talep Oluştur
+                    
+                    Yeni 
                 </button>
             </div>
-            <div class="col-4">
-                <button class="btn-primary btn-success btn btn-block" @click="durumDegistir('bekleyenler')">Açık / Cevaplandı</button>
-            </div>
-            <div class="col-4">
-                <button class="btn-primary btn-danger btn btn-block" @click="durumDegistir('tamamlananlar')">Tamamlandı</button>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+               
             </div>
         </div>
-
-
-
         <br /><br />
         <div class="row">
             <div class="col">
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">{{ pageTitle }}</h3>
+                        <h3 class="mb-0">
+                            <span v-if="hizmet=='qr-menu'">Qr Menü</span>
+                            <span v-if="hizmet=='web-site'">Web Site</span>
+                            <span v-if="hizmet=='e-ticaret'">E-Ticaret</span>
+                            <span v-if="hizmet=='mobil-uygulama'">Mobil Uygulama</span>
+                            <span v-if="hizmet=='web-view'">Web View</span>
+                        </h3>
+                        <span style="font-size:10px;color:gray">
+                            {{ dataCount }} adet aktif markanız bulunuyor
+                        </span>
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -54,37 +55,37 @@
                                                         <th
                                                             scope="col"
                                                             class="sort"
-                                                            data-sort="name"
+                                                            data-sort="budget"
                                                         >
-                                                            
-                                                        </th>
-                                                        <th
-                                                            scope="col"
-                                                            class="sort"
-                                                            data-sort="name"
-                                                        >
-                                                            Id
+                                                            Güncelle
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             class="sort"
                                                             data-sort="budget"
                                                         >
-                                                            Kayıt Tarihi
+                                                            ID
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             class="sort"
                                                             data-sort="budget"
                                                         >
-                                                            Destek Konu
+                                                            Marka Adı
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             class="sort"
                                                             data-sort="budget"
                                                         >
-                                                            Durum
+                                                            Marka Hizmet Bitiş Tarihi
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="sort"
+                                                            data-sort="budget"
+                                                        >
+                                                            Hizmet Ücreti
                                                         </th>
                                                         <th scope="col"></th>
                                                     </tr>
@@ -93,108 +94,68 @@
                                                     <tr
                                                         v-for="data in datas.data"
                                                     >
-                                                    <td class="text-center" style="width:100px">
-                                                        <div
-                                                            class="dropdown"
-                                                        >
-                                                            <a
-                                                                class="btn btn-sm btn-icon-only text-light"
-                                                                href="#"
-                                                                role="button"
-                                                                data-toggle="dropdown"
-                                                                aria-haspopup="true"
-                                                                aria-expanded="false"
-                                                            >
-                                                            <img src="https://img.icons8.com/cotton/64/menu.png" width="32" height="32" alt="">
+                                                        <td>
+                                                            <a :href="pageUrl+'/view/'+data.id">
+                                                                <img src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/30/external-edit-social-media-ui-tanah-basah-glyph-tanah-basah.png" alt="">
                                                             </a>
-                                                            <div
-                                                                class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
-                                                            >
-                                                                <a
-                                                                    class="dropdown-item"
-                                                                    href="#"
-                                                                    @click="
-                                                                        dataGuncelle(
-                                                                            data,'tamamlandi'
-                                                                        )
-                                                                    "
-                                                                    >Tamamla</a
-                                                                >
-                                                                <a
-                                                                    class="dropdown-item"
-                                                                    href="#"
-                                                                    @click="
-                                                                        dataGuncelle(
-                                                                            data,'acik'
-                                                                        )
-                                                                    "
-                                                                    >Aktif Et</a
-                                                                >
-                                                                <a
-                                                                    class="dropdown-item"
-                                                                    href="#"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal"
-                                                                    @click="
-                                                                        showUpdateDrawer(
-                                                                            data
-                                                                        )
-                                                                    "
-                                                                    >Düzenle</a
-                                                                >
-                                                                <a
-                                                                    class="dropdown-item"
-                                                                    href="#"
-                                                                    @click="
-                                                                        dataDelete(
-                                                                            data
-                                                                        )
-                                                                    "
-                                                                    >Sil</a
-                                                                >
-                                                            </div>
-                                                        </div>
-                                                        <a 
-
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal"
-                                                            @click="
-                                                                showUpdateDrawer(
-                                                                    data
-                                                                )
-                                                            "
-                                                            style="cursor: pointer;"
-                                                        >
-                                                            <img src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/30/external-edit-social-media-ui-tanah-basah-glyph-tanah-basah.png" alt="">
-                                                        </a>
-                                                        <a 
-
-                                                            @click="
-                                                                dataDelete(
-                                                                    data
-                                                                )
-                                                            "
-                                                            style="cursor: pointer;"
-                                                        >
-                                                            <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/delete-forever.png" alt="delete-forever"/>                                                        </a>
+                                                            
                                                         </td>
                                                         <td>
                                                             {{ data.id }}
                                                         </td>
                                                         <td>
-                                                            {{
-                                                               data.created_at | dateConverter
-                                                            }}
+                                                            {{ data.db_name }}
                                                         </td>
                                                         <td>
-                                                            {{
-                                                                data.db_destek_konu
-                                                            }}
+                                                            {{ data.db_hizmet_bitis_tarihi | dateConverterSaatsiz }}
                                                         </td>
                                                         <td>
-                                                            <span v-if="data.db_destek_durumu == 'acik'" style="font-size:10px" class="badge badge-primary "> Açık </span>
-                                                            <span v-if="data.db_destek_durumu == 'cevaplandi'" style="font-size:10px" class="badge badge-success "> Cevaplandı </span>
-                                                            <span v-if="data.db_destek_durumu == 'tamamlandi'" style="font-size:10px" class="badge badge-danger "> Tamamlandı </span>
+                                                            {{ data.db_hizmet_ucreti}}
+                                                        </td>
+                                                      
+                                                        <td class="text-right">
+                                                            <div
+                                                                class="dropdown"
+                                                            >
+                                                                <a
+                                                                    class="btn btn-sm btn-icon-only text-light"
+                                                                    href="#"
+                                                                    role="button"
+                                                                    data-toggle="dropdown"
+                                                                    aria-haspopup="true"
+                                                                    aria-expanded="false"
+                                                                >
+                                                                    <i
+                                                                        class="fas fa-ellipsis-v"
+                                                                    ></i>
+                                                                </a>
+                                                                <div
+                                                                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                                                                >
+                                                                    <a
+                                                                        class="dropdown-item"
+                                                                        href="#"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModal"
+                                                                        @click="
+                                                                            showUpdateDrawer(
+                                                                                data
+                                                                            )
+                                                                        "
+                                                                        >Düzenle</a
+                                                                    >
+                                                                    <a
+                                                                        class="dropdown-item"
+                                                                        href="#"
+                                                                        @click="
+                                                                            dataDelete(
+                                                                                data
+                                                                            )
+                                                                        "
+                                                                        >Sil</a
+                                                                    >
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -279,59 +240,49 @@ export default {
         return {
             rezervasyonBaglantisi: false,
             hizmetler: {},
+            dataCount:0,
             visible: false,
             updateVisible: false,
             formData: {},
-            dataDurum:"bekleyenler",
             baglanti_adi: "",
             baglanti_update_adi: "",
             query: "",
             modalData: {
                 butonBaslik: "", // butonBaslik'u burada tanımlayın
             },
-            datas: [],
-            bayis:[],
-            seciliBayi:""
+            datas: []
         };
     },
-    props: { pageTitle: String, pageUrl: String },
+    props: { pageTitle: String, pageUrl: String,hizmet:String },
     mounted() {
         this.dataGet();
-        this.bayiGet();
     },
     methods: {
-        durumDegistir(durum="bekleyenler"){
-            this.dataDurum=durum
-            this.dataGet();
-        },
         dataGet(page = 1) {
             axios
-                .post(this.pageUrl + "/get?page=" + page,{durum:this.dataDurum,seciliBayi:this.seciliBayi.id})
+                .post(this.pageUrl + "/get?page=" + page,{"hizmet":this.hizmet})
+                .then((response) => {
+                    console.log(response.data);
+                    this.datas = response.data.data;
+                    this.dataCount = response.data.dataCount;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        dataGetFiltrele() {
+            console.log(this.query);
+            /*axios
+                .post(this.pageUrl + "/get?page=" + page)
                 .then((response) => {
                     console.log(response.data);
                     this.datas = response.data.data;
                 })
                 .catch((error) => {
                     console.log(error);
-                });
+                });*/
         },
 
-        bayiGet() {
-            axios
-                .post(this.pageUrl + "/bayiGet")
-                .then((response) => {
-                    this.bayis = response.data.data;
-                    console.log(this.bayis)
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-        bayiUpdate(data) {
-            //console.log(data.data.db_hedef_firma)
-            this.formData.db_firma_id = data.data.db_hedef_firma.id
-            console.log(this.formData)
-        },
         dateConverter(dateF){
 
             // Date nesnesini oluştur
@@ -349,18 +300,6 @@ export default {
             // Yeni formatı oluştur
             return `${day}.${month}.${year}`;
         },
-        dataGetFiltrele() {
-            console.log(this.query);
-            /*axios
-                .post(this.pageUrl + "/get?page=" + page)
-                .then((response) => {
-                    console.log(response.data);
-                    this.datas = response.data.data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });*/
-        },
         dataCreate() {
             this.formData = {};
             this.modalData.islem = "/create";
@@ -375,18 +314,9 @@ export default {
             this.modalData.butonBaslik = "Güncelle";
             this.modalData.type = "update";
         },
-        dataGuncelle(data,islem) {
-            axios
-                .post(this.pageUrl + "/islemGuncelle", {"data":data,"islem":islem})
-                .then((response) => {
-                    this.$toasted.success(response.data.message)
-                    this.dataGet();
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
         dataStore(data) {
+            console.log(data);
+            data.data.db_hizmet=this.hizmet;
             axios
                 .post(this.pageUrl + this.modalData.islem, data.data)
                 .then((response) => {

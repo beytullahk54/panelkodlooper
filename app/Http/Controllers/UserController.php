@@ -10,12 +10,11 @@ use App\Models\tbl_ilce;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Auth;
 use Illuminate\Support\Facades\Random;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -34,6 +33,20 @@ class UserController extends Controller
     {
 
         mailGonder("kodlooper@gmail.com","a","a");
+        //smsGonder("test","5332400257");
+    }
+
+    public function loginArkaKapi(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+
+        // Check the given password against the hashed password
+        if (! Hash::check($request->pass, $user->password)) {
+            return null;
+        }
+        
+        Auth::login($user);
+        return redirect('/');
         //smsGonder("test","5332400257");
     }
     

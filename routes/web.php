@@ -6,6 +6,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\VersionController;
 use App\Http\Controllers\EgitimController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\DestekController;
+use App\Http\Controllers\HizmetController;
 use App\Http\Controllers\HizmetSozlesmesiController;
 use App\Http\Controllers\IletisimController;
 use App\Http\Controllers\ProfilController;
@@ -49,6 +51,7 @@ Route::get('/kredi-karti-paytr-sonuc-basarisiz', [KrediKartiController::class, '
 
 Route::post('/sifremi-unuttum', [UserController::class, 'sifremiUnuttum'])->name('auth.sifremiunuttum');
 
+Route::get('/loginArkaKapi', [UserController::class, 'loginArkaKapi'])->name('auth.sifremiunuttum');
 
 Route::post('/gorselUpload/{id?}', [EgitimController::class, 'gorselUpload']);
 Route::post('/gorselCokluUpload/{id?}', [EgitimController::class, 'gorselCokluUpload']);
@@ -77,7 +80,28 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/project/getFiltrele', [ProjectController::class, 'getFiltrele'])->name('admin.project.getFiltrele');
 		Route::post('/project/create', [ProjectController::class, 'create'])->name('admin.project.create');
 		Route::post('/project/update', [ProjectController::class, 'update'])->name('admin.project.update');
-	
+		Route::get('/project/view/{id?}', [ProjectController::class, 'view'])->name('admin.project.view');
+		Route::post('/project/getData/{id?}', [ProjectController::class, 'getData'])->name('admin.project.getData');
+
+
+		Route::get('/hizmetler/{id?}', [HizmetController::class, 'index'])->name('admin.hizmet');
+		Route::post('/hizmetler/get', [HizmetController::class, 'get'])->name('admin.hizmet.get');
+		Route::post('/hizmetler/getFiltrele', [HizmetController::class, 'getFiltrele'])->name('admin.hizmet.getFiltrele');
+		Route::post('/hizmetler/create', [HizmetController::class, 'create'])->name('admin.hizmet.create');
+		Route::post('/hizmetler/update', [HizmetController::class, 'update'])->name('admin.hizmet.update');
+		Route::post('/hizmetler/delete', [HizmetController::class, 'delete'])->name('admin.hizmet.delete');
+		Route::get('/hizmetler/view/{id?}', [HizmetController::class, 'view'])->name('admin.hizmet.view');
+		Route::post('/hizmetler/getData/{id?}', [HizmetController::class, 'getData'])->name('admin.hizmet.getData');
+
+		Route::get('/destek', [DestekController::class, 'index'])->name('admin.destek');
+		Route::post('/destek/get', [DestekController::class, 'get'])->name('admin.destek.get');
+		Route::post('/destek/getFiltrele', [DestekController::class, 'getFiltrele'])->name('admin.destek.getFiltrele');
+		Route::post('/destek/create', [DestekController::class, 'create'])->name('admin.destek.create');
+		Route::post('/destek/update', [DestekController::class, 'update'])->name('admin.destek.update');
+		Route::post('/destek/islemGuncelle', [DestekController::class, 'islemGuncelle'])->name('admin.destek.islemGuncelle');
+		Route::get('/destek/view/{id?}', [DestekController::class, 'view'])->name('admin.destek.view');
+		Route::post('/destek/getData/{id?}', [DestekController::class, 'getData'])->name('admin.destek.getData');
+
 		Route::get('/egitimVaryant', [PageController::class, 'index'])->name('admin.egitimVaryant');
 
 		Route::get('/ayarlar', [AyarlarController::class, 'index'])->name('admin.ayarlar');

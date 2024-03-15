@@ -27,10 +27,10 @@
                             <label
                                 for="exampleFormControlInput1"
                                 class="form-label"
-                                >Destek Konu</label
+                                >Proje Adı</label
                             >
                             <input
-                                v-model="data.db_destek_konu"
+                                v-model="data.db_name"
                                 type="text"
                                 class="form-control"
                                 id="exampleFormControlInput1"
@@ -40,18 +40,29 @@
                             <label
                                 for="exampleFormControlInput1"
                                 class="form-label"
-                                >Destek Konu Detayı</label
+                                >Proje Hizmet Bitiş Tarihi</label
                             >
-                            <textarea
-                                v-model="data.db_destek_aciklama"
-                                type="text"
-                                cols="20"
-                                rows="15"
+                            <input
+                                v-model="data.db_hizmet_bitis_tarihi"
+                                type="date"
                                 class="form-control"
                                 id="exampleFormControlInput1"
-                            >
-                            </textarea>
+                            />
                         </div>
+                        <div class="mb-3">
+                            <label
+                                for="exampleFormControlInput1"
+                                class="form-label"
+                                >Hizmet Ücreti</label
+                            >
+                            <input
+                                v-model="data.db_hizmet_ucreti"
+                                type="text"
+                                class="form-control"
+                                id="exampleFormControlInput1"
+                            />
+                        </div>
+                      
                     </div>
                     <div class="modal-footer">
                         <button
@@ -67,7 +78,7 @@
                             class="btn btn-primary"
                             data-bs-dismiss="modal"
                         >
-                            Talep Oluştur
+                            Kaydet / Güncelle
                         </button>
                     </div>
                 </div>
@@ -79,34 +90,13 @@
 <script>
 export default {
     data() {
-        return {
-            localDbHedefFirma: {} // db_hedef_firma prop'unu bir veri olarak al
-        };
+        return {};
     },
     props: {
         data: Object,
         modal: Object,
-        bayis: Array,
-    },
-    watch: {
-        // Watch özelliği ile data prop'u değiştiğinde localDbHedefFirma'yı güncelleyin
-        data: {
-            immediate: true,
-            handler(newData) {
-                this.localDbHedefFirma = newData.db_hedef_firma;
-            }
-        }
     },
     methods: {
-        kaydetClicked() {
-            // Modal içinde "Kaydet" butonuna tıklandığında bu metod çalışacak
-            this.$emit("kaydet", { data: this.data });
-        },
-        
-        updateLocalDbHedefFirma(newValue) {
-            this.localDbHedefFirma = newValue;
-            this.$emit('bayiUpdate', { data: { db_hedef_firma: newValue } });
-        },
         kaydetClicked() {
             // Modal içinde "Kaydet" butonuna tıklandığında bu metod çalışacak
             this.$emit("kaydet", { data: this.data });

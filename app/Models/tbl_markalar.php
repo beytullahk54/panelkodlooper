@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tbl_katilimcilar_egitim_varyant extends Model
+class tbl_markalar extends Model
 {
     use HasFactory;
+
 }

@@ -95,9 +95,45 @@
 
                 @if(Auth::User()->admin==1)
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::Asset('admin/destek') }}">
+                        <i class="fas fa-credit-card"></i> 
+                        Destek Talepleri
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.project') }}">
                         <i class="fas fa-credit-card"></i> 
-                        Projeler
+                        Özel Yazılım
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::Asset('admin/hizmetler/qr-menu') }}">
+                        <i class="fas fa-credit-card"></i> 
+                        Qr Menü
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::Asset('admin/hizmetler/web-site') }}">
+                        <i class="fas fa-credit-card"></i> 
+                        Web Sitesi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::Asset('admin/hizmetler/e-ticaret') }}">
+                        <i class="fas fa-credit-card"></i> 
+                        E-Ticaret
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::Asset('admin/hizmetler/mobil-uygulama') }}">
+                        <i class="fas fa-credit-card"></i> 
+                        Mobil Uygulama
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::Asset('admin/hizmetler/web-view') }}">
+                        <i class="fas fa-credit-card"></i> 
+                        Web View
                         </a>
                     </li>
                     <!--<li class="nav-item">

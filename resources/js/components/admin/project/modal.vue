@@ -62,6 +62,97 @@
                                 id="exampleFormControlInput1"
                             />
                         </div>
+                        <div class="mb-3">
+                            <label
+                                for="exampleFormControlInput1"
+                                class="form-label"
+                                >Proje Not</label
+                            >
+                            <input
+                                v-model="data.db_not"
+                                type="text"
+                                class="form-control"
+                                id="exampleFormControlInput1"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                for="exampleFormControlInput1"
+                                class="form-label"
+                                >Tahmini Gün</label
+                            >
+                            <input
+                                v-model="data.db_tahmini_gun"
+                                type="text"
+                                class="form-control"
+                                id="exampleFormControlInput1"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                for="exampleFormControlInput1"
+                                class="form-label"
+                                >Tahmini Bitiş Tarihi</label
+                            >
+                            <input
+                                v-model="data.db_tahmini_bitis_tarihi"
+                                type="date"
+                                class="form-control"
+                                id="exampleFormControlInput1"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                for="exampleFormControlInput1"
+                                class="form-label"
+                                >Çalışılan Gün</label
+                            >
+                            <input
+                                v-model="data.db_calisilan_gun"
+                                type="text"
+                                class="form-control"
+                                id="exampleFormControlInput1"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                for="exampleFormControlInput1"
+                                class="form-label"
+                                >Teklif Fiyat</label
+                            >
+                            <input
+                                v-model="data.db_teklif_ucret"
+                                type="text"
+                                class="form-control"
+                                id="exampleFormControlInput1"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                for="exampleFormControlInput1"
+                                class="form-label"
+                                >Anlaşılan Ücret</label
+                            >
+                            <input
+                                v-model="data.db_anlasilan_ucret"
+                                type="text"
+                                class="form-control"
+                                id="exampleFormControlInput1"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                for="exampleFormControlInput1"
+                                class="form-label"
+                                >Hizmet</label
+                            >
+                            <input
+                                v-model="data.db_hizmet"
+                                type="text"
+                                class="form-control"
+                                id="exampleFormControlInput1"
+                            />
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button

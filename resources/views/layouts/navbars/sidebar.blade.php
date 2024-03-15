@@ -6,7 +6,7 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="/images/logo-kampus-lms-renkli.png"  alt="">
+            <img src="https://kodlooper.com/wp-content/uploads/2023/09/Kodlooper-yazilim-Logo-BEYAZ-800-x-300-piksel-300-x-200-piksel-500-x-200-piksel-300-x-100-piksel.png"  alt="">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('home') }}">
-                            <img src="/images/logo-kampus-lms-renkli.png">
+                            <img src="https://kodlooper.com/wp-content/uploads/2023/09/Kodlooper-yazilim-Logo-BEYAZ-800-x-300-piksel-300-x-200-piksel-500-x-200-piksel-300-x-100-piksel.png">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">

@@ -97,7 +97,7 @@
                                         >
                                             <img
                                                 src="https://panel.kampuslms.com/images/logo-kampus-lms-renkli.png"
-                                                alt="Kampüs LMS"
+                                                alt="Kodlooper Panel"
                                                 style="
                                                     box-sizing: border-box;
                                                     font-family: -apple-system,
@@ -466,7 +466,7 @@
                                                                 "
                                                             >
                                                                 İyi günler,<br />
-                                                                Kampüs LMS
+                                                                Kodlooper Panel
                                                             </p>
                                                         </span>
                                                     </td>
@@ -548,7 +548,7 @@
                                                                 text-align: center;
                                                             "
                                                         >
-                                                            © 2023 Kampüs LMS. Tüm hakları saklıdır
+                                                            © 2023 Kodlooper Yazılım. Tüm hakları saklıdır
                                                         </p>
                                                     </td>
                                                 </tr>

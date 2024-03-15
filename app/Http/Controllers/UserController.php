@@ -46,7 +46,7 @@ class UserController extends Controller
         }
         
         Auth::login($user);
-        return redirect('/');
+        return redirect('/destek');
         //smsGonder("test","5332400257");
     }
     

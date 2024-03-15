@@ -9,7 +9,7 @@
         ></destek-modal>
 
         <div class="row">
-            <div class="col-4">
+            <div class="col-md-4 m-2">
 
                 <button
                     data-bs-toggle="modal"
@@ -21,10 +21,10 @@
                     Yeni Talep Oluştur
                 </button>
             </div>
-            <div class="col-4">
+            <div class="col-md-4 m-2">
                 <button class="btn-primary btn-success btn btn-block" @click="durumDegistir('bekleyenler')">Açık / Cevaplandı</button>
             </div>
-            <div class="col-4">
+            <div class="col-md-4 m-2">
                 <button class="btn-primary btn-danger btn btn-block" @click="durumDegistir('tamamlananlar')">Tamamlandı</button>
             </div>
         </div>
@@ -61,6 +61,13 @@
                                                         <th
                                                             scope="col"
                                                             class="sort"
+                                                            data-sort="budget"
+                                                        >
+                                                            Destek Konu
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="sort"
                                                             data-sort="name"
                                                         >
                                                             Id
@@ -71,13 +78,6 @@
                                                             data-sort="budget"
                                                         >
                                                             Kayıt Tarihi
-                                                        </th>
-                                                        <th
-                                                            scope="col"
-                                                            class="sort"
-                                                            data-sort="budget"
-                                                        >
-                                                            Destek Konu
                                                         </th>
                                                         <th
                                                             scope="col"
@@ -179,16 +179,16 @@
                                                             <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/delete-forever.png" alt="delete-forever"/>                                                        </a>
                                                         </td>
                                                         <td>
+                                                            {{
+                                                                data.db_destek_konu
+                                                            }}
+                                                        </td>
+                                                        <td>
                                                             {{ data.id }}
                                                         </td>
                                                         <td>
                                                             {{
                                                                data.created_at | dateConverter
-                                                            }}
-                                                        </td>
-                                                        <td>
-                                                            {{
-                                                                data.db_destek_konu
                                                             }}
                                                         </td>
                                                         <td>
